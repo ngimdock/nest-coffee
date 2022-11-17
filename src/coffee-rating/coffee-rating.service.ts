@@ -5,7 +5,5 @@ import { CoffeesService } from 'src/coffees/coffees.service';
 export class CoffeeRatingService {
   constructor(private readonly coffeesService: CoffeesService) {}
 
-  hello() {
-    return 'hello';
-  }
+  //
 }
