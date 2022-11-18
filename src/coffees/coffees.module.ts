@@ -4,18 +4,12 @@ import { CoffeesController } from './coffees.controller';
 import { CoffeesService } from './coffees.service';
 import { Coffee, Flavor } from './entities';
 import { Event } from '../events/entities';
-import { COFFEE_BRANDS } from './coffees.constants';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Coffee, Flavor, Event]), CoffeesModule],
+  imports: [TypeOrmModule.forFeature([Coffee, Flavor, Event]), ConfigModule],
   controllers: [CoffeesController],
-  providers: [
-    CoffeesService,
-    {
-      provide: COFFEE_BRANDS,
-      useFactory: () => ['buddy brew', 'nescafe', 'chocolate'],
-    },
-  ],
+  providers: [CoffeesService],
   exports: [CoffeesService],
 })
 export class CoffeesModule {}
