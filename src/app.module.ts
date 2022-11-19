@@ -1,15 +1,21 @@
-import { Module } from '@nestjs/common';
+import { Inject, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CoffeesModule } from './coffees/coffees.module';
 import { CoffeeRatingModule } from './coffee-rating/coffee-rating.module';
 import { ConfigModule } from '@nestjs/config';
-
+import appConfig from './config/app.config';
+import * as Joi from '@hapi/joi';
 @Module({
   imports: [
     ConfigModule.forRoot({
       envFilePath: '.enviroment',
+      validationSchema: Joi.object({
+        POSTGRES_HOST: Joi.required(),
+        POSTGRES_PORT: Joi.number().default(5432),
+      }),
+      load: [appConfig],
     }),
     TypeOrmModule.forRoot({
       type: 'postgres',
@@ -21,6 +27,7 @@ import { ConfigModule } from '@nestjs/config';
       autoLoadEntities: true,
       synchronize: true,
     }),
+
     CoffeesModule,
     CoffeeRatingModule,
   ],
