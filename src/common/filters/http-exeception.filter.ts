@@ -20,8 +20,6 @@ export class HttpExeceptionFilter implements ExceptionFilter {
 
     const exceptionResponse = exception.getResponse();
 
-    console.log({ exceptionResponse });
-
     const error =
       typeof response === 'string'
         ? { message: exceptionResponse }

@@ -6,6 +6,8 @@ import { HttpExeceptionFilter } from './common/filters';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  app.useGlobalFilters(new HttpExeceptionFilter());
+
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
@@ -16,8 +18,6 @@ async function bootstrap() {
       },
     }),
   );
-
-  app.useGlobalFilters(new HttpExeceptionFilter());
 
   await app.listen(3000);
 }

@@ -14,22 +14,7 @@ import { APP_PIPE } from '@nestjs/core';
     ConfigModule.forFeature(coffeesConfig),
   ],
   controllers: [CoffeesController],
-  providers: [
-    CoffeesService,
-    {
-      provide: APP_PIPE,
-      useFactory: () => {
-        return new ValidationPipe({
-          whitelist: true,
-          transform: true,
-          forbidNonWhitelisted: true,
-          transformOptions: {
-            enableImplicitConversion: true,
-          },
-        });
-      },
-    },
-  ],
+  providers: [CoffeesService],
   exports: [CoffeesService],
 })
 export class CoffeesModule {}
