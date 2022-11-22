@@ -13,11 +13,14 @@ import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
 import { ParseIntPipe } from 'src/common/pipes/parse-int.pipe';
 import { CoffeesService } from './coffees.service';
 import { CreateCoffeeDto, UpdateCoffeeDto } from './dto';
+import { ApiForbiddenResponse, ApiTags } from '@nestjs/swagger';
 
 @Controller('coffees')
+@ApiTags('coffees')
 export class CoffeesController {
   constructor(private readonly coffeesService: CoffeesService) {}
 
+  @ApiForbiddenResponse({ description: 'Forbiden.' })
   @Get()
   @Public()
   findAll(@Query() paginationQueryDto: PaginationQueryDto) {

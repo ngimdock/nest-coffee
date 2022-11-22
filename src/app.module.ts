@@ -1,7 +1,5 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { CoffeesModule } from './coffees/coffees.module';
 import { CoffeeRatingModule } from './coffee-rating/coffee-rating.module';
 import { ConfigModule } from '@nestjs/config';
@@ -36,7 +34,7 @@ import * as Joi from '@hapi/joi';
     CoffeeRatingModule,
     CommonModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}
