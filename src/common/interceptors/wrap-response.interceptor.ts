@@ -4,6 +4,7 @@ import {
   Injectable,
   NestInterceptor,
 } from '@nestjs/common';
+import { Response } from 'express';
 import { map, Observable } from 'rxjs';
 
 @Injectable()
@@ -12,6 +13,12 @@ export class WrapResponseInterceptor implements NestInterceptor {
     context: ExecutionContext,
     next: CallHandler<any>,
   ): Observable<any> | Promise<Observable<any>> {
-    return next.handle().pipe(map((data) => ({ data })));
+    const httpContext = context.switchToHttp();
+
+    const response = httpContext.getResponse<Response>();
+
+    const status = response.statusCode;
+
+    return next.handle().pipe(map((data) => ({ status, data })));
   }
 }
