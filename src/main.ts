@@ -28,10 +28,8 @@ async function bootstrap() {
   );
 
   const options = new DocumentBuilder()
-    .setTitle('Nest coffes')
-    .setDescription(
-      'Learn the nestjs fondamentales with a basic restfull application',
-    )
+    .setTitle('Nest coffees')
+    .setDescription('Learn the nestjs fondamentales by building a Rest API')
     .setVersion('1.0')
     .addTag('All APIs')
     .build();

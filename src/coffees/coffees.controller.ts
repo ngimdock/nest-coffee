@@ -13,21 +13,23 @@ import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
 import { ParseIntPipe } from 'src/common/pipes/parse-int.pipe';
 import { CoffeesService } from './coffees.service';
 import { CreateCoffeeDto, UpdateCoffeeDto } from './dto';
-import { ApiForbiddenResponse, ApiTags } from '@nestjs/swagger';
+import { ApiForbiddenResponse, ApiTags, ApiOperation } from '@nestjs/swagger';
 
 @Controller('coffees')
 @ApiTags('coffees')
 export class CoffeesController {
   constructor(private readonly coffeesService: CoffeesService) {}
 
-  @ApiForbiddenResponse({ description: 'Forbiden.' })
   @Get()
   @Public()
+  @ApiOperation({ summary: 'Get all coffees' })
+  @ApiForbiddenResponse({ description: 'Forbiden.' })
   findAll(@Query() paginationQueryDto: PaginationQueryDto) {
     return this.coffeesService.findAll(paginationQueryDto);
   }
 
   @Get(':id')
+  @ApiOperation({ summary: 'Get a coffee' })
   findOne(@Param('id') id: number, @Protocol() protocol: string) {
     console.log({ protocol });
 
@@ -36,12 +38,14 @@ export class CoffeesController {
 
   @Post()
   @Public()
+  @ApiOperation({ summary: 'Create a coffee' })
   create(@Body() createCoffeeDto: CreateCoffeeDto) {
     return this.coffeesService.create(createCoffeeDto);
   }
 
   @Patch(':id')
   @Public()
+  @ApiOperation({ summary: 'Update a coffee' })
   update(
     @Param('id', ParseIntPipe) id: number,
     @Body() updateCoffeeDto: UpdateCoffeeDto,
@@ -50,6 +54,7 @@ export class CoffeesController {
   }
 
   @Delete(':id')
+  @ApiOperation({ summary: 'Delete a coffee' })
   remove(@Param('id', ParseIntPipe) id: number) {
     return this.coffeesService.delete(id);
   }
