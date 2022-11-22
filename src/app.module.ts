@@ -6,6 +6,8 @@ import { ConfigModule } from '@nestjs/config';
 import { CommonModule } from './common/common.module';
 import appConfig from './config/app.config';
 import * as Joi from '@hapi/joi';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
 @Module({
   imports: [
     TypeOrmModule.forRootAsync({
@@ -34,7 +36,7 @@ import * as Joi from '@hapi/joi';
     CoffeeRatingModule,
     CommonModule,
   ],
-  controllers: [],
-  providers: [],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}
