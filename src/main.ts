@@ -31,7 +31,6 @@ async function bootstrap() {
     .setTitle('Nest coffees')
     .setDescription('Learn the nestjs fondamentales by building a Rest API')
     .setVersion('1.0')
-    .addTag('All APIs')
     .build();
 
   const document = SwaggerModule.createDocument(app, options);
