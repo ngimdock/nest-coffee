@@ -46,8 +46,6 @@ export class CoffeesService {
   }
 
   async create(createCoffeeDto: CreateCoffeeDto) {
-    // first create all the coffee's flavors if they don't exist on database
-
     const flavors = await Promise.all(
       createCoffeeDto.flavors.map((name) => this.prayloadFlavorByName(name)),
     );

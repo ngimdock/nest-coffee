@@ -8,7 +8,7 @@ import {
   Post,
   Query,
 } from '@nestjs/common';
-import { Protocol, Public } from 'src/common/decorators';
+import { Public } from 'src/common/decorators';
 import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
 import { ParseIntPipe } from 'src/common/pipes/parse-int.pipe';
 import { CoffeesService } from './coffees.service';
@@ -29,9 +29,10 @@ export class CoffeesController {
   }
 
   @Get(':id')
+  @Public()
   @ApiOperation({ summary: 'Get a coffee' })
-  findOne(@Param('id') id: number, @Protocol() protocol: string) {
-    console.log({ protocol });
+  findOne(@Param('id') id: number) {
+    console.log('hey');
 
     return this.coffeesService.findOne(id);
   }
@@ -44,7 +45,6 @@ export class CoffeesController {
   }
 
   @Patch(':id')
-  @Public()
   @ApiOperation({ summary: 'Update a coffee' })
   update(
     @Param('id', ParseIntPipe) id: number,
